@@ -5,11 +5,12 @@ todos = [
     "去图书馆借书",
     "整理GitHub仓库"
 ]
-print(f"{"---今天的待办事项---":^50}")
+total_wd = 60
+print(f"{"-----今天的待办事项-----":^{total_wd}}")
 for todo in todos:
     full_td = f'\u2022 {todo}'
-    print(f"{full_td:^50}")
-print(f"{"------------------":^50}")
+    print(f"{full_td:^{total_wd}}")
+print(f"{"----------------------":^{total_wd}}")
 print("\n")
 print("---")
 
@@ -17,14 +18,14 @@ import unicodedata
 
 def get_visual_width(s: str) -> int:
     """计算字符串在终端中的视觉宽度，汉字宽度为2，其他为1"""
-    width = 0
+    wd = 0
     for char in s:
         # 'F' (Full-width) 和 'W' (Wide) 通常被视为双字符宽度
         if unicodedata.east_asian_width(char) in ('F', 'W'):
-            width += 2
+            wd += 2
         else:
-            width += 1
-    return width
+            wd += 1
+    return wd
 
 # --- 主要逻辑 ---
 
