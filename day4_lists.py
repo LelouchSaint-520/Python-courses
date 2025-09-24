@@ -106,4 +106,20 @@ print("---")
 remaining_count = len(todos)
 print(f"太棒了！今天只剩下 {remaining_count} 项任务了！")
 
+'''
+Crud
+1. Creat a list 
+2. Read the elements in the list:
+    2.1 A = "xxx" in list
+        print(A)
+    2.2 index: A = list[0]
+        B = list[-1]
+    2.3 Change: list[0] = "xxx"
+    2.4 append insert
+    2.5 del list.pop
+    2.6 list.remove
+    2.7 slice: list[1:3] 左闭右开，切出第2，3两个元素
+    
+'''
+
 
