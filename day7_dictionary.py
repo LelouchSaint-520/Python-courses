@@ -35,14 +35,14 @@ print(f'the removed age is :{removed_value}')
 print(my_profile)
 
 # keys values items
-# traversal keys
+# Iterate keys
 for key in my_profile.keys():
     print(f'this is a key:{key}')
 
-# traversal values
+# Iterate values
 for value_1 in my_profile.values():
     print(f'this is a value:{value_1}')
 
-# traversal items:
+# Iterate items:
 for key_2, value_2 in my_profile.items():
     print(f"the value to key {key_2} is {value_2}")
