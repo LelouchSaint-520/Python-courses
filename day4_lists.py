@@ -121,5 +121,7 @@ Crud
     2.7 slice: list[1:3] 左闭右开，切出第2，3两个元素
     
 '''
-
-
+#combine: join only fit to string
+list_c = ["1",'22','3','4','5','6','7','8','help']
+list_combine = ".".join(list_c)
+print(list_combine)

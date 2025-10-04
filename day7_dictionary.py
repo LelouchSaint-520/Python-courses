@@ -46,3 +46,16 @@ for value_1 in my_profile.values():
 # Iterate items:
 for key_2, value_2 in my_profile.items():
     print(f"the value to key {key_2} is {value_2}")
+
+
+# isinstance test
+a = [1,2,3,4,5,6,7]
+b = isinstance(a,list)
+print(b)
+
+# join test
+c = ['1',"help",'2','3','5','gone']
+d = "$%#".join(c)
+print(d)
+
+
