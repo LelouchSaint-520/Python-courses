@@ -51,7 +51,7 @@ print("---Review---")
 def process_data(value):
     if value > 10:
         return "High"
-        print("This will not be printed.")
+        print("This will not be printed.") # 无效代码，无法到达
     print("Processing low value...")
     return "Low"
 '''
