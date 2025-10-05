@@ -45,4 +45,21 @@ print(f"The highest score found by our function is: {highest_score}")
 empty_list = []
 result_empty = find_max_in_list(empty_list)
 print(f"Result for an empty list is: {result_empty}")
+print("\n")
+
+print("---Review---")
+def process_data(value):
+    if value > 10:
+        return "High"
+        print("This will not be printed.")
+    print("Processing low value...")
+    return "Low"
+'''
+result = process_data(5)
+print(result)
+'''
+
+result_2 = process_data(20)
+print(result_2)
+
 
