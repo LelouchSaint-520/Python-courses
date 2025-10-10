@@ -1,7 +1,4 @@
 # --- 步骤一：定义我们的“蓝图” ---
-from day10_practise import highest_score
-
-
 class Dog:
     """A simple attempt to model a dog."""
 
@@ -131,6 +128,7 @@ print(f"更新后油量: {my_tesla.fuel_level:.2f}%")
 
 
 # Homework
+"""
 class Student:
     def __init__(self,name:str,age:int,sex:str,grade:int,student_id:int):
         self.name = name
@@ -164,3 +162,4 @@ class Student:
 lucy = Student("lucy",20,"Female",9,124345345)
 lucy.exam(-1,0)
 lucy.print_info()
+"""
