@@ -61,7 +61,7 @@ my_secure_car.update_odometer(50)
 my_secure_car.read_odometer() #The mileage is still 100.
 # Caution: That is the function setting the if-else function. Not the capsulation has the function that reject the updating!
 
-# Attempt to change the private attribute. Caution! This is a unrecommended habit although it is possible in Python!
+# Attempt to change the private attribute. Caution! This is a unrecommended habit, although it is possible in Python!
 my_secure_car._odometer_reading = -500
 my_secure_car.read_odometer()
-#!!! we need to obey the agreement, refuse to do that !!!
+#!!! we need to obey the convention, refuse to do that !!!

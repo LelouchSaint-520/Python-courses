@@ -1,6 +1,3 @@
-from day16_homework import lucky
-
-
 class BankAccount:
     def __init__(self,name,balance=0.00):
         self.name = name
@@ -26,7 +23,7 @@ class BankAccount:
             print(f"You have withdraw ${amount}, the current rest balance is {self._balance}!")
 
     def exchange_currency(self,amount):
-        global currency
+        currency = 0.00
         rate = 7
         if amount >self._balance:
             print("The operation is impossible!")

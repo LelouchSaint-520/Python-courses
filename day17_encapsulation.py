@@ -1,5 +1,5 @@
 """
-A. private attribute agreement
+A. private attribute by convention
 """
 
 class BandAccount:
@@ -8,7 +8,7 @@ class BandAccount:
         # 1. use _(underscore) to mark the balance as a private attribute.
         self._balance = balance
 
-    # 2. Getter: provide a safety readable access to private attribute.
+    # 2. Getter: provide safety readable access to private attribute.
     def get_balance(self):
         print("Checking credentials...")
         return self._balance
