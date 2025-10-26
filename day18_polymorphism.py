@@ -22,3 +22,5 @@ def make_animal_speak(animal):
 make_animal_speak(dog)
 make_animal_speak(cat)
 make_animal_speak(duck)
+
+print(f"{__name__}")

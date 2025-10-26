@@ -35,3 +35,5 @@ from utils.string_formatter import format_as_title as make_title
 
 print(f"Another sum using alias: {calc.add(100,200)}")
 print(make_title("aliases are cool"))
+
+
