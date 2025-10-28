@@ -1,5 +1,6 @@
 from game_components.room import Room
 from game_components.player import Player
+from game_components.item import Item
 
 def setup_world():
     """Creates all the rooms and links them together."""
@@ -28,6 +29,17 @@ def setup_world():
     attic.link_room(bedroom,"upstairs")
     bedroom.link_room(attic,"downstairs")
 
+    # 3. create item instance
+    key = Item("key","A small, rusty key.")
+    sword = Item("sword","A short sword, it looks sharp.")
+    note = Item("note","A crumpled piece of paper.")
+
+    # 4.New: put the items into the rooms
+    kitchen.add_item(note)
+    garden.add_item(key)
+    living_room.add_item(sword)
+
+
     print("World setup complete!")
     return kitchen #Return the starting room.
 
@@ -35,14 +47,46 @@ def game_loop(player):
     """The main loop of the game."""
     print("Welcome to the Adventure Game!")
     print("Type 'quit' to exit.")
+    print("Commands:'quit','inventory','<direction>','take<item>','drop<item>'")
     while True:
         # Print the description of the current room
         print("\n" + player.current_room.get_full_description())
 
         # Get user command
-        command = input("> ").lower().strip()
+        command_input = input("> ").lower().strip()
+        parts = command_input.split()
+        command = parts[0]
+
+        if command == "quit":
+            print("Thanks for playing!")
+            break
+        elif command == "inventory" or command =="i":
+            player.show_inventory()
+        elif command =="take":
+            if len(parts) > 1:
+                item_name = " ".join(parts[1:])
+                player.take_item(item_name)
+            else:
+                print("Take what?")
+        elif command == "drop":
+            if len(parts)>1:
+                item_name = " ".join(parts[1:])
+                player.drop_item(item_name)
+            else:
+                print("Drop what?")
+
+        #elif command == "look" :
+        #    print("\n" + player.current_room.get_full_description())  # the method of class should be added () after its name.
 
 
+        else:
+            player.move(command)
+
+
+        """
+        # For today, we only implement a 'quit' command
+        # --- core change:  the command to the player object to implement.
+        player.move(command)  
         match command:
             case "look":
                 print("\n" + player.current_room.get_full_description()) # the method of class should be added () after its name.
@@ -52,20 +96,6 @@ def game_loop(player):
                 break
             case _:
                 player.move(command)
-
-
-        """
-        if command == "look":
-            print("\n" + player.current_room.get_full_description()) # the method of class should be add () after its name.
-            break
-
-        # For today, we only implement a 'quit' command
-        if command == "quit":
-            print("Thanks for playing!")
-            break
-
-        # --- core change:  the command to the player object to implement.
-        player.move(command)
         """
 
 # --- Main execution ---
