@@ -11,16 +11,21 @@ class Room:
         self.name = name
         self.description = description
         # exits is dictionary mapping direction (str) to another Room object.
-        self.exits = {}
-        self.items = [] # <<< add a item object into the list
+        self.exits = {} # {key:{value}}
+        self.items = [] # <<< add an item object into the list
 
-    def link_room(self,room_to_link,direction):
+    def link_room(self,room_to_link,direction,locked = False,key_name = None):
         """
         link this room to another one in a specific direction
+        :param key_name: the name of key
+        :param locked: the state of door
         :param room_to_link: The room object to link to
         :param direction: the direction of exits (e.g.: "north")
         """
-        self.exits[direction] = room_to_link
+        self.exits[direction] = {'destination':room_to_link,
+                                 'locked':locked,
+                                 'key_name':key_name # The Name of key is required
+                                 }
 
     def add_item(self,item):
         self.items.append(item)
@@ -39,10 +44,22 @@ class Room:
             item_names = [item.name for item in self.items]
             full_desc += ",".join(item_names)+ ".\n"
 
+
+
+
+
         # List the available exits
+        # <<< New : Add door info>>>
         available_exits = self.exits.keys()
+        full_desc += "Exits: "
+        exit_desc = []
         if available_exits:
-            full_desc += f"Exits {",".join(available_exits)}\n "
+            for direction, exit_info in self.exits.items():
+                if exit_info["locked"]:
+                    exit_desc.append(f"{direction}(locked)")
+                else:
+                    exit_desc.append(direction)
+            full_desc += ", ".join(exit_desc) + "\n"
         else:
             full_desc += "There is no obvious exits. \n"
         return full_desc

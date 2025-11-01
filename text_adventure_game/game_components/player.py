@@ -17,6 +17,13 @@ class Player:
         self.current_room = starting_room
         self.inventory = [] # <<< New: inventory of player
 
+    def has_item(self,item_name):
+        """Check ig the player has an item by its name."""
+        for item in self.inventory:
+            if item.name.lower() == item_name.lower():
+                return True
+        return False
+
     def move(self, direction):
         """
         Moves the player in a given direction, if the exit exists.
@@ -25,8 +32,18 @@ class Player:
         # Check if the requested direction is a valid exit from current room
         if direction in self.current_room.exits: #Notion: exits is a dict! use [] to index and "in exits()" is not a correct method.
             #If it is, update the player's current room to the new room
-            self.current_room = self.current_room.exits[direction]
-            print(f"You move {direction}.")
+            exit_info = self.current_room.exits[direction]
+            if exit_info["locked"]:
+                if self.has_item(exit_info["key_name"]):
+                    print(f"You used {exit_info["key_name"]} to unlock the door.")
+                    self.current_room = exit_info["destination"]
+                    print(f"You move {direction}.")
+                else:
+                    print(f"The door to the {direction} is locked"
+                          f"Please use {exit_info["key_name"]} to unlock!")
+            else:
+                print(f"You moved {direction}")
+                self.current_room = exit_info["destination"]
         else:
             print("You can't go that way.")
 
