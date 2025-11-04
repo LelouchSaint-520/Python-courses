@@ -42,6 +42,7 @@ def setup_world():
     kitchen.add_item(note)
     garden.add_item(treasure_key)
     living_room.add_item(sword)
+    attic.add_item(key)
 
 
     print("World setup complete!")
@@ -58,7 +59,7 @@ def game_loop(player, win_room):
         print("\n" + player.current_room.get_full_description())
 
         if player.current_room == win_room:
-            print("\n" ,  win_room.get_full_description)
+            print("\n" ,  win_room.get_full_description())
             print("Congratulations! You found the treasury and won the game!")
             break
 

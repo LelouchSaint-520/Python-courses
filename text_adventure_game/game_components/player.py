@@ -1,7 +1,6 @@
 from .room import Room
 # Use relative import, import Room class from room module
-# from .item import Item
-
+from .item import Item
 
 class Player:
     """
@@ -15,7 +14,7 @@ class Player:
         """
         self.name = name
         self.current_room = starting_room
-        self.inventory = [] # <<< New: inventory of player
+        self.inventory:list[Item] = [] # <<< New: inventory of player
 
     def has_item(self,item_name):
         """Check ig the player has an item by its name."""

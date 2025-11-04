@@ -44,10 +44,6 @@ class Room:
             item_names = [item.name for item in self.items]
             full_desc += ",".join(item_names)+ ".\n"
 
-
-
-
-
         # List the available exits
         # <<< New : Add door info>>>
         available_exits = self.exits.keys()
