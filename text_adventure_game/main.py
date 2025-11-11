@@ -37,12 +37,16 @@ def setup_world():
     sword = Item("sword","A short sword, it looks sharp.")
     note = Item("note","A crumpled piece of paper.")
     treasure_key = Item("treasure key","A heavy, ornate golden key.")
+    statue = Item("statue","A statue", False)
+    crown = Item("crown","The condition of winning")
 
     # 4.New: put the items into the rooms
     kitchen.add_item(note)
     garden.add_item(treasure_key)
     living_room.add_item(sword)
     attic.add_item(key)
+    garden.add_item(statue)
+    treasure.add_item(crown)
 
 
     print("World setup complete!")
@@ -60,8 +64,10 @@ def game_loop(player, win_room):
 
         if player.current_room == win_room:
             print("\n" ,  win_room.get_full_description())
-            print("Congratulations! You found the treasury and won the game!")
-            break
+            for item in player.inventory:
+                if item.name == "crown":
+                    print("Congratulations! You found the treasury and won the game!")
+                    break
 
         # Get user command
         command_input = input("> ").lower().strip()
@@ -73,6 +79,10 @@ def game_loop(player, win_room):
             break
         elif command in ("inventory","i"):  # command == "inventory" or command =="i":
             player.show_inventory()
+
+        elif command == "look":
+            player.current_room.get_full_description()
+
         elif command =="take":
             if len(parts) > 1:
                 item_name = " ".join(parts[1:])

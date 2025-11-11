@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+</head>
+<body>
+    {# 这是一个模板里的注释，它不会显示在最终的HTML中 #}
+
+    <h1>User Profile: {{ username }}</h1>
+
+    <p>Welcome, {{ username }}! Here are your tasks for today:</p>
+
+    {% if tasks %}  {# 检查tasks列表是否存在且不为空 #}
+        <ul>
+            {% for task in tasks %}
+                <li>{{ task }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no tasks today. Enjoy your day!</p>
+    {% endif %}
+</body>
+</html>

@@ -51,9 +51,12 @@ class Player:
         # iterate the items in the room
         for item in self.current_room.items:
             if item.name.lower() == item_name.lower():
-                self.current_room.items.remove(item)
-                self.inventory.append(item)
-                print(f"You picked up the {item.name}.")
+                if item.is_takable:
+                    self.current_room.items.remove(item)
+                    self.inventory.append(item)
+                    print(f"You picked up the {item.name}.")
+                else:
+                    print(f"The {item_name} is not takable!")
                 return
         print(f"There is no {item_name} here.")
 
