@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact US</title>
+    {#This is a title of the website name showed on the tab #}
+</head>
+<body>
+    <h1>Leave us a message!</h1>
+    <form action="/contact" method="POST">
+        <div>
+            <label for="name" >Your Name:</label>
+            <input type="text" id="name" name="visitor_name" required>
+        </div>
+        <br>
+        <div>
+            <label for="message">Your Message:</label><br>
+            <textarea id="message" name="visitor_message" rows="5" cols="30" required></textarea>
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="Send Message">
+        </div>
+    </form>
+</body>
+</html>

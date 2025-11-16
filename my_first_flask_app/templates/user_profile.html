@@ -9,7 +9,12 @@
 
     <h1>User Profile: {{ username }}</h1>
 
-    <p>Welcome, {{ username }}! Here are your tasks for today:</p>
+
+    {%if not is_admin:%}
+        <p>Welcome, {{ username }}! Here are your tasks for today:</p>
+    {%else%}
+        <p>Welcome Administrator! Here are your tasks for today:</p>
+    {%endif%}
 
     {% if tasks %}  {# 检查tasks列表是否存在且不为空 #}
         <ul>

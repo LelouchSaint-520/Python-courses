@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Welcome to log in system</h1>
+    <form action="/login" method="POST">
+        <div>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="login_name" required>
+        </div>
+        <br>
+        <div>
+            <label for="password">Your Password</label>
+            <input type="text" id="password" name="login_password" required>
+        </div>
+        <br>
+        <div>
+            <button type="submit" name="action" value="login">
+                Login System
+            </button>
+            <button type="submit" name="action" value="forget">
+                Forget ?
+            </button>
+        </div>
+        <br>
+        <div>
+            <label for="remark">Your massage:</label><br>
+            <textarea id="remark" name="login_remark" rows="5" cols="20"></textarea><br>
+            <button type="submit" name="action" value="message" formnovalidate>
+                Leave Message
+            </button>
+        </div>
+    </form>
+</body>
+</html>
