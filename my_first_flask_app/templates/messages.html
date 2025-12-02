@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Messages</title>
+</head>
+<body>
+    <h1>Messages Received</h1>
+    <a href="/contact">Leave a new message</a> | <a href="/">Back to Home</a>
+    <hr>
+    {% for name,message,time in messages %}
+        <div>
+            <p><strong>From:</strong>{{ name }}</p>
+            <p><strong>Message:</strong>{{ message }}</p>
+            <p><small><em>At: {{ time }}</em></small></p>
+        </div>
+        <hr>
+    {% else %}
+        <p>No messages yet.</p>
+    {% endfor %}
+</body>
+</html>

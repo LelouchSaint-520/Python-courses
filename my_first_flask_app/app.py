@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect  # import flask render_template request url_for and redirect
+import sqlite3
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -39,6 +41,23 @@ def contact():
         visitor_name = request.form["visitor_name"]
         visitor_message = request.form["visitor_message"]
 
+        # --- database operation ---
+        # 1. connect database
+        conn = sqlite3.connect('messages.db')
+        # 2. achieve the cursor
+        c = conn.cursor()
+        # 3. execute the insert. use ? as a positional symbol.
+        c.execute("INSERT INTO messages (visitor_name, visitor_message) VALUES (?, ?)",(visitor_name,visitor_message))
+        # 4. commit the affair
+        conn.commit()
+        # 5. close the connection
+        conn.close()
+        # --- the operation of database finished ---
+
+
+
+
+        """
         # In the real app instance, you will store the data into database. However, we only print it to show that we received the request.
         print("--- New Message Received ---")
         print(f"From: {visitor_name}")
@@ -46,8 +65,23 @@ def contact():
         print("----------------------------")
         #redirect to the "Thank_you" page after dealing with the data
         return redirect(url_for("thank_you"))
+        """
+
     # Otherwise, the required method is GET, and we only need to show the form page.
     return render_template("contact.html")
+
+@app.route("/messages")
+def show_messages():
+    conn = sqlite3.connect("messages.db")
+    c = conn.cursor()
+    # execute the select statement，and retrieve  all comments in reverse chronological order.
+    c.execute("SELECT visitor_name,visitor_message,timestamp FROM messages ORDER BY timestamp DESC")
+    # fetchall() retrieve all results of requisition
+    all_messages = c.fetchall()
+    conn.close()
+    return render_template("messages.html",messages=all_messages)
+
+
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -59,6 +93,10 @@ def login():
             print("--- Login information ---")
             print(f"Login name is {login_name}")
             print(f"Login Password is {login_password}")
+            if login_name =="admin" and login_password=="password123":
+                print("Admin login successful!")
+            else:
+                print("Invalid credentials!")
             return redirect(url_for("thank_you"))
 
         elif click_action == "forget":
