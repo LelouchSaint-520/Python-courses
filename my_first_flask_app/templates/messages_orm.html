@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Messages (ORM)</title>
+</head>
+<body>
+    <h1>
+        Messages Received via SQLAlchemy
+    </h1>
+    <hr>
+    {% for message in messages %}
+        <div>
+            <p><strong>From:</strong>{{message.visitor_name}}</p>
+            <p><strong>Message:</strong>{{message.visitor_message}}</p>
+            <p><small><em>At: {{message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</em></small></p>
+        </div>
+        <hr>
+    {% else %}
+        <p>No messages yet.</p>
+    {% endfor %}
+</body>
+</html>

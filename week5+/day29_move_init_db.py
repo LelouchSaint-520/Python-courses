@@ -1,5 +1,5 @@
 import sqlite3
-connection = sqlite3.connect("messages.db")
+connection = sqlite3.connect("../my_first_flask_app/messages.db")
 cursor = connection.cursor()
 
 cursor.execute(

@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, url_for, redirect  # import flask render_template request url_for and redirect
 import sqlite3
+from database import SessionLocal,engine,Base
+from models import Message
 
 app = Flask(__name__)
 
+Base.metadata.create_all(bind=engine)
 @app.route('/')
 def home():
     """Renders the static index.html page."""
@@ -37,6 +40,7 @@ def user_profile(name):
 def contact():
     # judge the method of request:
     if request.method == "POST":
+        """
         #This is a POST request, we need to deal with a form data
         visitor_name = request.form["visitor_name"]
         visitor_message = request.form["visitor_message"]
@@ -53,9 +57,18 @@ def contact():
         # 5. close the connection
         conn.close()
         # --- the operation of database finished ---
-
-
-
+        """
+        db = SessionLocal()
+        try:
+            new_message = Message(
+                visitor_name=request.form['visitor_name'],
+                visitor_message=request.form['visitor_message']
+            )
+            db.add(new_message)
+            db.commit()
+        finally:
+            db.close()
+        return redirect(url_for('thank_you'))
 
         """
         # In the real app instance, you will store the data into database. However, we only print it to show that we received the request.
@@ -66,12 +79,12 @@ def contact():
         #redirect to the "Thank_you" page after dealing with the data
         return redirect(url_for("thank_you"))
         """
-
     # Otherwise, the required method is GET, and we only need to show the form page.
     return render_template("contact.html")
 
 @app.route("/messages")
 def show_messages():
+    """
     conn = sqlite3.connect("messages.db")
     c = conn.cursor()
     # execute the select statement，and retrieve  all comments in reverse chronological order.
@@ -80,7 +93,13 @@ def show_messages():
     all_messages = c.fetchall()
     conn.close()
     return render_template("messages.html",messages=all_messages)
-
+    """
+    db = SessionLocal()
+    try:
+        all_messages = db.query(Message).order_by(Message.timestamp.desc()).all()
+    finally:
+        db.close()
+    return render_template('messages_orm.html', messages=all_messages)
 
 
 @app.route("/login", methods=["GET","POST"])
